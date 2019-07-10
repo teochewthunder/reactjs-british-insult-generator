@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<title>Insult Generator</title>
+		<style>
+			#insultContent
+			{
+				border-radius: 20px;
+				font-size: 20px;
+				background-color: rgba(255, 200, 0, 0);
+				color: #FFFFFF;
+				font-family: verdana;
+				font-weight: bold;
+				padding: 2em;
+				width: 20em;
+				margin: 10% auto 0 auto;
+				text-align: center;
+				-webkit-transition: 1.5s all;
+				transition: 1.5s all;
+			}
+		</style>
+
+    	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    	<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+
+	<body>
+	    <div id="insultContainer"></div>
+
+	    <script type="text/babel">
+	    	class Insult extends React.Component 
+	    	{
+	    		constructor(props)
+	    		{
+      				super(props);
+      				this.state = 
+      				{
+      					"actionIndex": 0,
+      					"adjectiveIndex": 0,
+      					"curseIndex": 0,
+      					"nounIndex": 0
+      				};
+      				this.changeInsult = this.changeInsult.bind(this);
+  				}
+
+	    		changeInsult()
+	    		{
+	    			this.interval = setInterval
+	    			(
+	    				() => 
+	    				{
+	    					document.getElementById("insultContent").style.backgroundColor = "rgba(255, 200, 0, 1)";
+			    			this.setState
+			    			(
+			    				{
+			    					"actionIndex": Math.floor((Math.random() * (this.action.length))),
+			    					"adjectiveIndex": Math.floor((Math.random() * (this.adjective.length))),
+			    					"curseIndex": Math.floor((Math.random() * (this.curse.length))),
+			    					"nounIndex": Math.floor((Math.random() * (this.noun.length)))
+			    				}
+			    			); 
+
+			    			setTimeout
+			    			(
+			    				() =>
+			    				{
+									document.getElementById("insultContent").style.backgroundColor = "rgba(255, 200, 0, 0)";	
+			    				},
+								1500
+			    			);
+				    	}, 
+				    	3000
+				    );
+	    		}
+
+				componentDidMount()
+				{
+				    this.changeInsult();
+				}
+
+	    		render()
+	    		{
+					this.action = 
+					[
+						"Get out of here",
+						"Go to hell",
+						"Eat shit",
+						"Fall over and die",
+						"Get a life",
+						"Go kill yourself",
+						"Shut your mouth",
+						"Get bent",
+						"Sod off",
+						"Go jump off a bridge"
+					];
+
+					this.adjective = 
+					[
+						"incomprehensible",
+						"obnoxious",
+						"repugnant",
+						"repulsive",
+						"ignorant",
+						"misshapen",
+						"noisy",
+						"glorious",
+						"defective",
+						"absolute",
+						"vigorous"
+					];
+
+					this.curse = 
+					[
+						"bitch",
+						"shit",
+						"piss",
+						"dick",
+						"twat",
+						"ass",
+						"cum",
+						"jizz",
+						"fuck"
+					];
+
+					this.noun = 
+					[
+						"monkey",
+						"dwarf",
+						"box",
+						"house",
+						"garden",
+						"train",
+						"camel",
+						"hamster",
+						"trumpet",
+						"bubble",
+						"waffle",
+						"spoon",
+						"stick",
+						"sandwich",
+						"cruiser",
+						"carriage",
+						"ticket",
+						"collection",
+						"cable",
+						"bagel",
+						"sack",
+						"puppet",
+						"lamp"
+					];
+
+			    	return (
+				    		<p id="insultContent">
+				    		{this.action[this.state.actionIndex]}, you {this.adjective[this.state.adjectiveIndex]} {this.curse[this.state.curseIndex]} {this.noun[this.state.nounIndex]} 
+				    		</p>
+			    	);    			
+	    		}
+	    	}
+
+			ReactDOM.render(<Insult />, document.getElementById("insultContainer"));
+	    </script>
+	</body>
+</html> 
